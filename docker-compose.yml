@@ -1,0 +1,15 @@
+version: '3'
+services:
+  stan:
+    image: 'nats-streaming:0.12.0'
+    restart: always
+    command: ["-st", "FILE", "--dir", "/logs", "-m", "8222"]
+    ports:
+      - '8222:8222'
+      - '4222:4222'
+    volumes:
+      - 'stan:/logs'
+
+volumes:
+  stan:
+

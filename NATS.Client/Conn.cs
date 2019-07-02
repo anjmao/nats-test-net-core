@@ -1415,7 +1415,6 @@ namespace NATS.Client
 
                 Thread t = new Thread(() =>
                 {
-                    Console.WriteLine("doReconnect");
                     doReconnect();
                 });
                 t.Name = generateThreadName("Reconnect");
@@ -1623,7 +1622,6 @@ namespace NATS.Client
         private void processOpError(Exception e)
         {
             bool disconnected = false;
-            Console.WriteLine("processOpError", e);
 
             lock (mu)
             {
@@ -1632,7 +1630,6 @@ namespace NATS.Client
                     return;
                 }
                 
-                Console.WriteLine("Allow reconnect", Opts.AllowReconnect);
                 if (Opts.AllowReconnect && status == ConnState.CONNECTED)
                 {
                     Console.WriteLine("processReconnect");
@@ -2352,7 +2349,6 @@ namespace NATS.Client
         // and kicking the flush go routine. These writes should be protected.
         internal void publish(string subject, string reply, byte[] data, int offset, int count)
         {
-            Console.WriteLine("publish " + subject);
             if (string.IsNullOrWhiteSpace(subject))
             {
                 throw new NATSBadSubscriptionException();
